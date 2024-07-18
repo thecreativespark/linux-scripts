@@ -16,8 +16,8 @@ fi
 read -p "Do you want to Setup Desktop? (y/n): " uin
 uin=$(echo "$uin" | tr '[:upper:]' '[:lower:]')
 if [ "$uin" = "y" ]; then
-  sudo pacman -Syu xorg xorg-xinit i3 feh gcc python3 pulseaudio curl htop neofetch thunar pipewire vlc lightdm firefox alsa-utils i3status dmenu
-  sudo systemctl enable lightdm
+  sudo pacman -Syu xorg xorg-xinit i3 feh gcc python3 pulseaudio curl htop neofetch thunar pipewire vlc xorg-xdm firefox alsa-utils i3status dmenu
+  sudo systemctl enable xdm
   sudo systemctl enable pipewire
   touch ~/.xinitrc
   echo "exec i3" >> ~/.xinitrc
