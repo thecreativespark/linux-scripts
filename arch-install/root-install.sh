@@ -17,9 +17,14 @@ echo "KEYMAP=us" >> /etc/vconsole.conf
 
 bash systemd-install.sh
 
+read -p "Do you want to set hostname? (y/n) " uin
 
-read -p "Enter the new hostname: " hname
-echo "$hname" |  tee -a /etc/hostname
+if [uin = 'y']; then
+    read -p "Enter the hostname: " hname
+    echo "$hname" |  tee -a /etc/hostname
+else
+    echo "Continuing without a hostname"
+fi
 
 echo "Enter Root Password:"
 passwd
@@ -29,14 +34,24 @@ hwclock --systohc
 
 systemctl enable systemd-timesyncd
 
-read -p "Enter username: " uname
-useradd -m $uname
-passwd $uname
+
+read -p "Do you want to add a user? (y/n) " uin  
+
+if [uin = 'y']; then
+    read -p "Enter username: " uname
+    useradd -m $uname
+    passwd $uname
+else
+    echo "Continuing without adding a user. Only root user."
+fi
+
 
 echo "WARNING"
 echo "WARNING"
 echo "WARNING"
-echo "CHANGE THE UUID IN arch.conf"
+echo "Perform the following critical steps: "
+echo "1. CHANGE THE UUID IN arch.conf"
+echo "2. ADD HOSTNAME, if not added"
 echo "WARNING"
 echo "WARNING"
 echo "WARNING"

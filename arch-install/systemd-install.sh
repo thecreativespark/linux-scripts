@@ -1,9 +1,7 @@
 #!/bin/bash
 
-bootctl --boot-path=/boot install
+bootctl install --boot-path=/boot
 lsblk
-cp arch.conf /boot/loader/entries/
-cp loader.conf /boot/loader/loader.conf
+cp -f arch.conf /boot/loader/entries/
+cp -f loader.conf /boot/loader/
 bootctl update
-
-

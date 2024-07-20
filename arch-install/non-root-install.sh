@@ -2,7 +2,7 @@
 
 echo "This script assumes that you have already created a new user other than root and executing this script as that user."
 
-read -p "Do you want to Setup CUPS? (y/n): " uin
+read -p "Do you want to Setup CUPS? This might be required to add printer. (y/n): " uin
 uin=$(echo "$uin" | tr '[:upper:]' '[:lower:]')
 if [ "$uin" = "y" ]; then
   sudo pacman -Syu cups
@@ -37,3 +37,5 @@ if [ "$uin" = "y" ]; then
 else
   echo "No Bluetooth"
 fi
+
+exit 0
