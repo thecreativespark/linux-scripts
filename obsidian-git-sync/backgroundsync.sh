@@ -1,13 +1,14 @@
 #!/bin/bash
 
-vaultpath = "~/anugsan/"
+vaultpath="$HOME/anugsan/"
 
-cd $vaultpath
+cd "$vaultpath"
 
-while [1]
+while true
 do
     bash obsidiansync.sh
-    sleep 60
+    sleep 10
 done
 
 exit 0
+
