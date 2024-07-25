@@ -17,8 +17,8 @@ Open the directory of the local repo in obsidian as a Vault
 Run obsidiansync.sh to sync
 
 ## Step 7
-Setup to sync automatically, by changing the vaultpath in `backgroundsync.sh`, then copying the `backgroundsync.sh` file to `~/.config/` and pasting the following code at the end of `~/config/i3/config`
+Setup to sync automatically, by changing the vaultpath in `backgroundsync.sh`, then copying the `backgroundsync.sh` file to `~/.config/` and pasting the following code at the end of `~/.config/i3/config`
 
 ```
-exec ~/config/backgroundsync.sh &
+exec ~/.config/backgroundsync.sh &
 ```
