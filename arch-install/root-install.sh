@@ -1,7 +1,9 @@
 #!/bin/bash
 
 pacman -Syu
-pacman -S nano sudo git ufw networkmanager base-devel
+pacman -S nano sudo git ufw networkmanager base-devel grub efibootmgr
+grub-install
+grub-mkconfig -o /boot/grub/grub.cfg
 
 systemctl enable systemd-journald
 systemctl enable NetworkManager
