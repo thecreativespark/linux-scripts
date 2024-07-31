@@ -15,13 +15,17 @@ touch /etc/vconsole.conf
 echo "KEYMAP=us" >> /etc/vconsole.conf
 
 
-bash systemd-install.sh
-
 read -p "Do you want to set hostname? (y/n) " uin
-
-if [uin = 'y']; then
+uin=$(echo "$uin" | tr '[:upper:]' '[:lower:]')
+if [[ $uin = y ]]; then
     read -p "Enter the hostname: " hname
-    echo "$hname" |  tee -a /etc/hostname
+    if [[ ! $hname =~ ^[a-zA-Z0-9][a-zA-Z0-9-]*$ ]]; then
+        echo "Invalid hostname format. Only alphanumeric characters and hyphens allowed."
+        exit 1
+    fi
+    touch /etc/hostname
+    echo "$hname" > /etc/hostname
+    echo "Hostname set successfully."
 else
     echo "Continuing without a hostname"
 fi
@@ -36,14 +40,21 @@ systemctl enable systemd-timesyncd
 
 
 read -p "Do you want to add a user? (y/n) " uin  
+uin=$(echo "$uin" | tr '[:upper:]' '[:lower:]')
 
-if [uin = 'y']; then
+if [[ $uin == "y" ]]; then
     read -p "Enter username: " uname
-    useradd -m $uname
-    passwd $uname
+    if id "$uname" &> /dev/null; then
+        echo "User $uname already exists."
+    else
+        useradd -m "$uname"
+        passwd "$uname"
+        echo "User $uname added successfully."
+    fi
 else
     echo "Continuing without adding a user. Only root user."
 fi
+
 
 
 echo "WARNING"
